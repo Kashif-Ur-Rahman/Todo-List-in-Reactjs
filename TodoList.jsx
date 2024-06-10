@@ -3,11 +3,13 @@ import { useState } from "react"
 
 export default function TodoList() {
     let [todos, setTodos] = useState(["Sample Task"]);
-    let [newTodo, setNewTodo] = useState(" ");
+    let [newTodo, setNewTodo] = useState("");
 
-    let newTask = () => {
-        setTodos([...todos, newTodo])
-        setNewTodo(" ");
+    let addNewTask = () => {
+        if (newTodo.trim() !== "") {
+            setTodos([...todos, newTodo]);
+            setNewTodo(""); // Clear the input field
+        }
     };
 
     let updateTodoValue = (event) => {
@@ -17,9 +19,9 @@ export default function TodoList() {
     return (
         <div>
             <h1>Todo List</h1>
-            <input placeholder="add a task" onChange={updateTodoValue} />
+            <input placeholder="add a task" value={newTodo} onChange={updateTodoValue} />
             <br />
-            <button onClick={newTask}>ADD TASK</button>
+            <button onClick={addNewTask}>ADD TASK</button>
             <br />
             <br />
             <br />
